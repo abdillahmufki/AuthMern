@@ -10,6 +10,7 @@ import EditUser from "./pages/dashboard/EditUser";
 import EditProduct from "./pages/dashboard/EditProduct";
 import AddProduct from "./pages/dashboard/AddProduct";
 import Home from "./pages/user/Home";
+import NotFound from "./pages/user/NotFound";
 const App = () => {
   return (
     <React.Fragment>
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="/products" element={<Products />} />
           <Route path="/products/edit/:id" element={<EditProduct />} />
           <Route path="/products/add" element={<AddProduct />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </React.Fragment>
