@@ -45,7 +45,7 @@ const Header = () => {
           </label>
           <ul
             tabIndex={0}
-            className="z-50 p-2 mt-3 bg-white shadow-md menu menu-sm dropdown-content rounded-box w-52"
+            className="z-50 p-2 mt-3 text-black bg-white shadow-md menu menu-sm dropdown-content rounded-box w-52"
           >
             <li>
               <Link>Home</Link>
@@ -88,7 +88,7 @@ const Header = () => {
           <li tabIndex={0}>
             <details>
               <summary>Parent</summary>
-              <ul className="p-2 bg-white shadow-md">
+              <ul className="p-2 text-black bg-white shadow-md">
                 <li>
                   <Link>Submenu 1</Link>
                 </li>

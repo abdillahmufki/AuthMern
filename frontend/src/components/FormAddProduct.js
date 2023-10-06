@@ -28,7 +28,7 @@ const FormAddProduct = () => {
   };
 
   return (
-    <div>
+    <React.Fragment>
       <div className="text-black">
         <h2 className="text-2xl font-semibold">Products</h2>
         <p className="text-base">Add New Product</p>
@@ -36,6 +36,7 @@ const FormAddProduct = () => {
       <div className="card">
         <div className="card-body">
           <form onSubmit={addProduct} className="flex flex-col">
+            <p>{message}</p>
             <div>
               <label>Name</label>
               <input
@@ -68,7 +69,7 @@ const FormAddProduct = () => {
           </form>
         </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 
