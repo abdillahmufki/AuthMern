@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const UsersList = () => {
-  const [users, setUsers] = React.useState([]);
+  const [users, setUsers] = useState([]);
 
   const apiUrl = process.env.REACT_APP_API_USERS;
 
