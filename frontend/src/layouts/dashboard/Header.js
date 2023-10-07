@@ -7,8 +7,8 @@ import { LogoutUser, reset } from "../../features/authSlice";
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const { user } = useSelector((state) => state.auth);
+
   const logout = () => {
     dispatch(LogoutUser());
     dispatch(reset());
@@ -18,8 +18,12 @@ const Header = () => {
   return (
     <div className="navbar bg-base-200 sticky top-0 z-50">
       <div className="flex-1">
-        <NavLink to="/" className="btn btn-ghost normal-case text-xl">
-          daisyUI
+        <NavLink
+          to="/"
+          target="_blank"
+          className="btn btn-ghost normal-case text-xl"
+        >
+          LOGO
         </NavLink>
       </div>
       <div className="flex-none">

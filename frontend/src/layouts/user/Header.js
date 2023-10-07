@@ -69,7 +69,7 @@ const Header = () => {
             </li>
           </ul>
         </div>
-        <Link className="text-xl normal-case btn btn-ghost">daisyUI</Link>
+        <Link className="text-xl normal-case btn btn-ghost">LOGO</Link>
       </div>
       <div className="hidden navbar-center lg:flex">
         <ul className="px-1 menu menu-horizontal">
@@ -77,7 +77,7 @@ const Header = () => {
             <Link to="/">Home</Link>
           </li>{" "}
           <li>
-            <Link to="company-profile">Company Profile</Link>
+            <Link to="/company-profile">Company Profile</Link>
           </li>
           <li>
             <Link to="/product">Products</Link>
@@ -104,7 +104,7 @@ const Header = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <Button>Hubungi Kami</Button>
+        <Button>Contact Me</Button>
       </div>
     </div>
   );
