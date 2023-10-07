@@ -43,10 +43,10 @@ const ProductsUser = () => {
       <div className="grid items-center justify-center grid-cols-2 gap-4 my-10 lg:grid-cols-4 md:grid-cols-2">
         {currentProducts.map((product, index) => (
           <div
-            key={product.uuid}
+            key={index}
             // className="grid items-center justify-center grid-cols-3 gap-4"
           >
-            <div className="shadow-xl w-52 lg:w-72 md:w-96 card card-compact bg-base-100">
+            <div className="shadow-xl w-52 lg:w-72 md:w-96 card card-compact bg-[#f5f5f5] text-black">
               <figure>
                 <img
                   src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"

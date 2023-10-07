@@ -65,7 +65,7 @@ const Header = () => {
               </ul>
             </li>
             <li>
-              <Link>Item 3</Link>
+              <Link>Careers</Link>
             </li>
           </ul>
         </div>
@@ -74,16 +74,16 @@ const Header = () => {
       <div className="hidden navbar-center lg:flex">
         <ul className="px-1 menu menu-horizontal">
           <li>
-            <Link>Home</Link>
+            <Link to="/">Home</Link>
           </li>{" "}
           <li>
-            <Link>Company Profile</Link>
+            <Link to="company-profile">Company Profile</Link>
           </li>
           <li>
-            <Link>Products</Link>
+            <Link to="/product">Products</Link>
           </li>
           <li>
-            <Link>Our Concern</Link>
+            <Link to="/our-concern">Our Concern</Link>
           </li>
           <li tabIndex={0}>
             <details>
@@ -99,7 +99,7 @@ const Header = () => {
             </details>
           </li>
           <li>
-            <Link>Item 3</Link>
+            <Link>Careers</Link>
           </li>
         </ul>
       </div>

@@ -11,13 +11,21 @@ import EditProduct from "./pages/dashboard/EditProduct";
 import AddProduct from "./pages/dashboard/AddProduct";
 import Home from "./pages/user/Home";
 import NotFound from "./pages/user/NotFound";
+import ProductsUser from "./pages/user/Products";
+import OurConcern from "./pages/user/OurConcern";
+import CompanyProfile from "./pages/user/CompanyProfile";
 const App = () => {
   return (
     <React.Fragment>
       <Router>
         <Routes>
+          {/* USER */}
           <Route path="/" element={<Home />} />
           <Route path="/admin" element={<Login />} />
+          <Route path="/product" element={<ProductsUser />} />
+          <Route path="/our-concern" element={<OurConcern />} />
+          <Route path="/company-profile" element={<CompanyProfile />} />
+          {/* ADMIN */}
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/users" element={<Users />} />
           <Route path="/users/add" element={<AddUser />} />

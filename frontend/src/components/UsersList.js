@@ -5,10 +5,8 @@ import axios from "axios";
 const UsersList = () => {
   const [users, setUsers] = useState([]);
 
-  const apiUrl = process.env.REACT_APP_API_USERS;
-
   const getUsers = async () => {
-    const { data } = await axios.get(apiUrl);
+    const { data } = await axios.get("http://localhost:4000/users");
     setUsers(data);
   };
 
@@ -17,10 +15,9 @@ const UsersList = () => {
   }, []);
 
   const deleteUser = async (id) => {
-    await axios.delete(`${apiUrl}/${id}`);
+    await axios.delete(`http://localhost:4000/users/${id}`);
     getUsers();
   };
-
   return (
     <di>
       <div className="mb-5 text-black">

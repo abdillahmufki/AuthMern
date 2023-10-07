@@ -9,10 +9,8 @@ const ProductList = () => {
   const [searchText, setSearchText] = useState("");
   const productsPerPage = 10;
 
-  const apiUrl = process.env.REACT_APP_API_PRODUCTS;
-
   const fetchProducts = async () => {
-    const { data } = await axios.get(apiUrl);
+    const { data } = await axios.get("http://localhost:4000/products");
     setProducts(data);
   };
 
@@ -21,7 +19,7 @@ const ProductList = () => {
   }, []);
 
   const deleteProduct = async (id) => {
-    await axios.delete(`${apiUrl}/${id}`);
+    await axios.delete(`http://localhost:4000/products/${id}`);
     fetchProducts();
   };
 
@@ -91,7 +89,7 @@ const ProductList = () => {
               <tr key={product.uuid}>
                 <td>{indexOfFirstProduct + index + 1}</td>
                 <td>{product.name}</td>
-                <td>{product.price}</td>
+                <td>Rp. {product.price}</td>
                 <td>{product.user.name}</td>
                 <td>
                   <div className="flex flex-row max-[567px]:flex-col justify-start gap-5">
