@@ -23,7 +23,6 @@ const Users = () => {
       navigate("/dashboard");
     }
   }, [isError, user, navigate]);
-
   return (
     <Layout>
       <UsersList />
