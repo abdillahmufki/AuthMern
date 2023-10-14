@@ -1,6 +1,25 @@
 import Product from "../models/ProductModel.js";
 import User from "../models/UsersModel.js";
 import { Op } from "sequelize";
+
+export const getUserProduct = async (req, res) => {
+  try {
+    const products = await Product.findAll({
+      attributes: ["uuid", "name", "price"],
+      include: [
+        {
+          model: User,
+          attributes: ["name", "email"],
+        },
+      ],
+    });
+
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export const getProducts = async (req, res) => {
   try {
     let response;

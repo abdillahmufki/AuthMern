@@ -9,7 +9,7 @@ const ProductsUser = () => {
 
   useEffect(() => {
     const getProducts = async () => {
-      const { data } = await axios.get("http://localhost:4000/products");
+      const { data } = await axios.get("http://localhost:4000/products-user");
       setProducts(data);
     };
     getProducts();
@@ -17,7 +17,6 @@ const ProductsUser = () => {
 
   // Menghitung jumlah halaman yang diperlukan
   const totalPages = Math.ceil(products.length / productsPerPage);
-
   // Mengambil produk untuk halaman saat ini
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -46,21 +45,22 @@ const ProductsUser = () => {
             key={index}
             // className="grid items-center justify-center grid-cols-3 gap-4"
           >
-            <div className="shadow-xl w-52 lg:w-72 md:w-96 card card-compact bg-[#f5f5f5] text-black">
+            <div className="shadow-xl w-[165px] lg:w-72 md:w-96 card card-compact bg-[#f5f5f5] text-black">
               <figure>
                 <img
                   src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
                   alt="Shoes"
+                  className="scale-100 hover:scale-125 ease-in duration-200"
                 />
               </figure>
               <div className="card-body">
                 <h3 className="text-lg font-semibold card-title">
                   {product.name}
                 </h3>
-                <p>Rp. {product.price}</p>
-                <div className="justify-end card-actions">
+                <p>{product.price}</p>
+                {/* <div className="justify-end card-actions">
                   <button className="btn btn-primary">Buy Now</button>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

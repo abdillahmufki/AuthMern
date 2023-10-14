@@ -48,21 +48,29 @@ const Header = () => {
             className="z-50 p-2 mt-3 text-black bg-white shadow-md menu menu-sm dropdown-content rounded-box w-52"
           >
             <li>
-              <Link>Home</Link>
+              <Link to="/">Home</Link>
+            </li>{" "}
+            <li>
+              <Link to="/company-profile">Company Profile</Link>
             </li>
             <li>
-              <Link>Company Profile</Link>
+              <Link to="/product">Products</Link>
             </li>
             <li>
-              <Link>Parent</Link>
-              <ul className="p-2">
-                <li>
-                  <Link>Submenu 1</Link>
-                </li>
-                <li>
-                  <Link>Submenu 2</Link>
-                </li>
-              </ul>
+              <Link to="/our-concern">Our Concern</Link>
+            </li>
+            <li tabIndex={0}>
+              <details>
+                <summary>Parent</summary>
+                <ul className="p-2 text-black shadow-md">
+                  <li>
+                    <Link>Submenu 1</Link>
+                  </li>
+                  <li>
+                    <Link>Submenu 2</Link>
+                  </li>
+                </ul>
+              </details>
             </li>
             <li>
               <Link>Careers</Link>
