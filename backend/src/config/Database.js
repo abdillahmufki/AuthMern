@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 
 const db = new Sequelize("mern_db", "root", "", {
-  host: process.env.DB_HOST,
+  host: "localhost",
   dialect: "mysql",
 });
 

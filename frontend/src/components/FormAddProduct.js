@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 const FormAddProduct = () => {
   const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
   const [message, setMessage] = useState("");
+  const [image, setImage] = useState(null);
 
   const navigate = useNavigate();
 
@@ -13,10 +14,12 @@ const FormAddProduct = () => {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:4000/products", {
-        name,
-        price,
-      });
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("description", description);
+      formData.append("image", image);
+
+      await axios.post("http://localhost:4000/products", formData);
 
       setMessage("Product added successfully");
       navigate("/products");
@@ -35,8 +38,21 @@ const FormAddProduct = () => {
       </div>
       <div className="card">
         <div className="card-body">
-          <form onSubmit={addProduct} className="flex flex-col">
+          <form
+            onSubmit={addProduct}
+            className="flex flex-col"
+            method="post"
+            enctype="multipart/form-data"
+          >
             <p>{message}</p>
+            <div>
+              <label>Image</label>
+              <input
+                type="file"
+                className="w-full my-2 text-white input input-bordered p-2"
+                onChange={(e) => setImage(e.target.files[0])}
+              />
+            </div>
             <div>
               <label>Name</label>
               <input
@@ -48,13 +64,13 @@ const FormAddProduct = () => {
               />
             </div>
             <div>
-              <label>Price</label>
+              <label>description</label>
               <input
                 type="text"
-                placeholder="Please Input price"
+                placeholder="Please Input description"
                 className="w-full my-2 text-white input input-bordered"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
               />
             </div>
 

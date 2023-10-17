@@ -1,11 +1,20 @@
 import Product from "../models/ProductModel.js";
 import User from "../models/UsersModel.js";
 import { Op } from "sequelize";
+import path from "path";
+import { fileURLToPath } from "url"; // Add this import
+import multer from "multer";
+
+// Use import.meta.url to get the current module's URL and convert it to a path
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// The rest of your code remains unchanged.
 
 export const getUserProduct = async (req, res) => {
   try {
     const products = await Product.findAll({
-      attributes: ["uuid", "name", "price"],
+      attributes: ["uuid", "name", "description", "image"],
       include: [
         {
           model: User,
@@ -25,7 +34,7 @@ export const getProducts = async (req, res) => {
     let response;
     if (req.role == "admin") {
       response = await Product.findAll({
-        attributes: ["uuid", "name", "price"],
+        attributes: ["uuid", "name", "description", "image"],
         include: [
           {
             model: User,
@@ -35,7 +44,7 @@ export const getProducts = async (req, res) => {
       });
     } else {
       response = await Product.findAll({
-        attributes: ["uuid", "name", "price"],
+        attributes: ["uuid", "name", "description", "image"],
         where: {
           userId: req.userId,
         },
@@ -66,7 +75,7 @@ export const getProductById = async (req, res) => {
     let response;
     if (req.role == "admin") {
       response = await Product.findOne({
-        attributes: ["uuid", "name", "price"],
+        attributes: ["uuid", "name", "description", "image"],
         where: {
           id: product.id,
         },
@@ -79,9 +88,9 @@ export const getProductById = async (req, res) => {
       });
     } else {
       response = await Product.findOne({
-        attributes: ["uuid", "name", "price"],
+        attributes: ["uuid", "name", "description", "image"],
         where: {
-          [Op.and]: [{ id: product.id }, { userId: req.userId }], // [Op.and] = AND [Op.or] = OR
+          [Op.and]: [{ id: product.id }, { userId: req.userId }],
           userId: req.userId,
         },
         include: [
@@ -98,19 +107,55 @@ export const getProductById = async (req, res) => {
   }
 };
 
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, "../../public/images")); // Define the absolute path to the destination folder
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "_" + file.originalname);
+  },
+});
+
 export const createProduct = async (req, res) => {
-  const { name, price } = req.body;
+  const { name, description } = req.body;
+
   try {
-    await Product.create({
+    if (!req.file) {
+      return res.status(400).json({ message: "Please upload an image" });
+    }
+
+    const image = req.file.path;
+
+    const product = await Product.create({
       name: name,
-      price: price,
+      description: description,
       userId: req.userId,
+      image: image,
     });
-    res.status(201).json({ message: "Product created" });
+
+    res.status(201).json({ message: "Product created", product });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const upload = multer({
+  storage: storage,
+  limits: { fileSize: 5000000 },
+  fileFilter: function (req, file, cb) {
+    const fileTypes = /jpeg|jpg|png|gif/;
+    const extname = fileTypes.test(
+      path.extname(file.originalname).toLowerCase()
+    );
+    const mimetype = fileTypes.test(file.mimetype);
+
+    if (mimetype && extname) {
+      return cb(null, true);
+    } else {
+      cb("Error: Only images (JPEG, JPG, PNG, GIF) are allowed!");
+    }
+  },
+}).single("image");
 
 export const updateProduct = async (req, res) => {
   try {
@@ -124,13 +169,13 @@ export const updateProduct = async (req, res) => {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    const { name, price } = req.body;
+    const { name, description } = req.body;
 
     if (req.role === "admin") {
       await Product.update(
         {
           name: name,
-          price: price,
+          description: description,
         },
         {
           where: {
@@ -146,7 +191,7 @@ export const updateProduct = async (req, res) => {
       }
 
       await Product.update(
-        { name, price },
+        { name, description },
         {
           where: {
             [Op.and]: [{ id: product.id }, { userId: req.userId }],

@@ -1,11 +1,10 @@
 import { Sequelize } from "sequelize";
 import db from "../config/Database.js";
-import Users from "./UsersModel.js";
 
 const { DataTypes } = Sequelize;
 
-const Products = db.define(
-  "products",
+const Blogs = db.define(
+  "blogs",
   {
     uuid: {
       type: DataTypes.STRING,
@@ -15,7 +14,7 @@ const Products = db.define(
         notEmpty: true,
       },
     },
-    name: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -23,14 +22,7 @@ const Products = db.define(
         len: [3, 100],
       },
     },
-    image: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      validate: {
-        notEmpty: false,
-      },
-    },
-    description: {
+    content: {
       type: DataTypes.STRING,
       allowNull: true,
       validate: {
@@ -50,7 +42,4 @@ const Products = db.define(
   }
 );
 
-Users.hasMany(Products);
-Products.belongsTo(Users, { foreignKey: "userId" });
-
-export default Products;
+export default Blogs;

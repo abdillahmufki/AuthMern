@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 const FormEditProduct = () => {
   const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
   const { id } = useParams();
@@ -12,7 +12,7 @@ const FormEditProduct = () => {
     const getProduct = async () => {
       const { data } = await axios.get(`http://localhost:4000/products/${id}`);
       setName(data.name);
-      setPrice(data.price);
+      setDescription(data.description);
     };
     getProduct();
   }, [id]);
@@ -23,7 +23,7 @@ const FormEditProduct = () => {
     try {
       await axios.patch(`http://localhost:4000/products/${id}`, {
         name,
-        price,
+        description,
       });
 
       setMessage("Product updated successfully");
@@ -54,13 +54,13 @@ const FormEditProduct = () => {
               />
             </div>
             <div>
-              <label>Price</label>
+              <label>Description</label>
               <input
                 type="text"
                 placeholder="Please Input price"
                 className="w-full my-2 text-white input input-bordered"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
               />
             </div>
 

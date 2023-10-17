@@ -28,8 +28,8 @@ const ProductList = () => {
       const nameMatch = product.name
         .toLowerCase()
         .includes(searchText.toLowerCase());
-      const priceMatch = product.price.toString().includes(searchText);
-      return nameMatch || priceMatch;
+      const descriptionMatch = product.description.includes(searchText);
+      return nameMatch || descriptionMatch;
     });
     return Math.ceil(filteredProducts.length / productsPerPage);
   };
@@ -42,8 +42,8 @@ const ProductList = () => {
     const nameMatch = product.name
       .toLowerCase()
       .includes(searchText.toLowerCase());
-    const priceMatch = product.price.toString().includes(searchText);
-    return nameMatch || priceMatch;
+    const descriptionMatch = product.description.includes(searchText);
+    return nameMatch || descriptionMatch;
   });
 
   const paginate = (pageNumber) => {
@@ -77,37 +77,45 @@ const ProductList = () => {
           <tr>
             <th>No</th>
             <th>Name</th>
-            <th>Price</th>
+            <th>description</th>
             <th>Created By</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {filteredProducts
-            .slice(indexOfFirstProduct, indexOfLastProduct)
-            .map((product, index) => (
-              <tr key={product.uuid}>
-                <td>{indexOfFirstProduct + index + 1}</td>
-                <td>{product.name}</td>
-                <td>Rp. {product.price}</td>
-                <td>{product.user.name}</td>
-                <td>
-                  <div className="flex flex-row max-[567px]:flex-col justify-start gap-5">
-                    <Link to={`/products/edit/${product.uuid}`}>
-                      <button className="p-3 text-white bg-green-800 rounded-md hover:bg-green-700">
-                        Edit
+          {filteredProducts.length === 0 ? ( // Check if filteredProducts is empty
+            <tr>
+              <td className="text-center" colSpan="5">
+                Data kosong
+              </td>
+            </tr>
+          ) : (
+            filteredProducts
+              .slice(indexOfFirstProduct, indexOfLastProduct)
+              .map((product, index) => (
+                <tr key={product.uuid}>
+                  <td>{indexOfFirstProduct + index + 1}</td>
+                  <td>{product.name}</td>
+                  <td>{product.description}</td>
+                  <td>{product.user.name}</td>
+                  <td>
+                    <div className="flex flex-row max-[567px]:flex-col justify-start gap-5">
+                      <Link to={`/products/edit/${product.uuid}`}>
+                        <button className="p-3 text-white bg-green-800 rounded-md hover:bg-green-700">
+                          Edit
+                        </button>
+                      </Link>
+                      <button
+                        onClick={() => deleteProduct(product.uuid)}
+                        className="p-3 text-white bg-red-800 rounded-md hover:bg-red-700"
+                      >
+                        Delete
                       </button>
-                    </Link>
-                    <button
-                      onClick={() => deleteProduct(product.uuid)}
-                      className="p-3 text-white bg-red-800 rounded-md hover:bg-red-700"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
+                    </div>
+                  </td>
+                </tr>
+              ))
+          )}
         </tbody>
       </table>
       <div className="flex justify-center py-5">
