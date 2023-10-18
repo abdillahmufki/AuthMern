@@ -3,7 +3,7 @@ import cors from "cors";
 import session from "express-session";
 import SequelizeStore from "connect-session-sequelize";
 import dotenv from "dotenv";
-import db from "./src/config/Database.js"; // Assuming this import is correct
+import db from "./src/config/Database.js";
 import UserRoute from "./src/routes/UserRoute.js";
 import ProductRoute from "./src/routes/ProductRoute.js";
 import AuthRoute from "./src/routes/AuthRoute.js";
@@ -45,13 +45,13 @@ app.use(
 );
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
 
 app.use(UserRoute);
 app.use(ProductRoute); // Add route path
 app.use(AuthRoute); // Add route path
 app.use(BlogRoute); // Add route path
-// Serve static files from the "assets/products" directory
-app.use("/images", express.static("public/images"));
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
