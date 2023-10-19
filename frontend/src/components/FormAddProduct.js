@@ -42,7 +42,7 @@ const FormAddProduct = () => {
             onSubmit={addProduct}
             className="flex flex-col"
             method="post"
-            enctype="multipart/form-data"
+            encType="multipart/form-data"
           >
             <p>{message}</p>
             <div>

@@ -2,12 +2,7 @@ import Product from "../models/ProductModel.js";
 import User from "../models/UsersModel.js";
 import { Op } from "sequelize";
 import path from "path";
-import { fileURLToPath } from "url"; // Add this import
 import multer from "multer";
-
-// Use import.meta.url to get the current module's URL and convert it to a path
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 // The rest of your code remains unchanged.
 
@@ -109,10 +104,10 @@ export const getProductById = async (req, res) => {
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, "../../public/images")); // Define the absolute path to the destination folder
+    cb(null, "public/images"); // Define the absolute path to the destination folder
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + "_" + file.originalname);
+    cb(null, Date.now() + path.extname(file.originalname));
   },
 });
 
