@@ -4,8 +4,6 @@ import { Op } from "sequelize";
 import path from "path";
 import multer from "multer";
 
-// The rest of your code remains unchanged.
-
 export const getUserProduct = async (req, res) => {
   try {
     const products = await Product.findAll({
@@ -107,7 +105,7 @@ const storage = multer.diskStorage({
     cb(null, "public/images"); // Define the absolute path to the destination folder
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname));
+    cb(null, Date.now() + "_" + path.extname(file.originalname));
   },
 });
 

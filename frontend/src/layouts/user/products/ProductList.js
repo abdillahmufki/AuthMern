@@ -34,6 +34,7 @@ const ProductList = () => {
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers.push(i);
   }
+
   return (
     <div className="min-h-screen p-5 py-10 bg-white">
       <div className="flex justify-center py-5">
@@ -42,18 +43,15 @@ const ProductList = () => {
       <div className="grid items-center justify-center grid-cols-2 gap-4 my-10 lg:grid-cols-4 md:grid-cols-2">
         {currentProducts.length === 0 ? ( // Check if filteredProducts is empty
           <div>
-            <p className="text-center text-black">Data kosong</p>
+            <p className="text-center text-black">Product not found</p>
           </div>
         ) : (
           currentProducts.map((product, index) => (
-            <div
-              key={index}
-              // className="grid items-center justify-center grid-cols-3 gap-4"
-            >
+            <div key={index}>
               <div className="shadow-xl w-52 max-[428px]:w-[165px] gap-3 lg:w-64 md:w-80 card card-compact bg-[#f5f5f5] text-black">
                 <figure>
                   <img
-                    src={product.image}
+                    src={`../../../../../backend/public/images/${product.image}`}
                     alt={`Foto ${product.name}`}
                     className="scale-100 hover:scale-125 ease-in duration-200 text-sm"
                   />
@@ -63,9 +61,6 @@ const ProductList = () => {
                     {product.name}
                   </h3>
                   <p>{product.description}</p>
-                  {/* <div className="justify-end card-actions">
-                  <button className="btn btn-primary">Buy Now</button>
-                </div> */}
                 </div>
               </div>
             </div>

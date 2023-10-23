@@ -40,31 +40,31 @@ const ProductsUser = () => {
         <h2 className="py-10 text-4xl font-semibold text-black">Products</h2>
       </div>
       <div className="grid items-center justify-center grid-cols-2 gap-4 my-10 lg:grid-cols-4 md:grid-cols-2">
-        {currentProducts.map((product, index) => (
-          <div
-            key={index}
-            // className="grid items-center justify-center grid-cols-3 gap-4"
-          >
-            <div className="shadow-xl w-[165px] lg:w-72 md:w-96 card card-compact bg-[#f5f5f5] text-black">
-              <figure>
-                <img
-                  src={product.image}
-                  alt={`Foto ${product.name}`}
-                  className="scale-100 hover:scale-125 ease-in duration-200 text-sm"
-                />
-              </figure>
-              <div className="card-body">
-                <h3 className="text-lg font-semibold card-title">
-                  {product.name}
-                </h3>
-                <p>{product.description}</p>
-                {/* <div className="justify-end card-actions">
-                  <button className="btn btn-primary">Buy Now</button>
-                </div> */}
+        {currentProducts.length === 0 ? (
+          <div>
+            <p className="text-center text-black">Product not found</p>
+          </div>
+        ) : (
+          currentProducts.map((product, index) => (
+            <div key={index}>
+              <div className="shadow-xl w-[165px] lg:w-72 md:w-96 card card-compact bg-[#f5f5f5] text-black">
+                <figure>
+                  <img
+                    src={`../../../../../backend/public/images/${product.image}`}
+                    alt={`Foto ${product.name}`}
+                    className="scale-100 hover:scale-125 ease-in duration-200 text-sm"
+                  />
+                </figure>
+                <div className="card-body">
+                  <h3 className="text-lg font-semibold card-title">
+                    {product.name}
+                  </h3>
+                  <p>{product.description}</p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
       <div className="flex justify-center py-5">
         <Pagination
